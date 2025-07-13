@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import "./theme.css";
-import Navbar from "./components/Navbar";
+import Navbar from "../components/Navbar";
 import localFont from "next/font/local";
 const workSans = localFont({
   src: [
