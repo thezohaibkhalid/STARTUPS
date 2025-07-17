@@ -1,13 +1,13 @@
-import { Search } from "lucide-react";
-import Image from "next/image";
 import SearchForm from "@/components/SearchForm";
-import { auth } from "@/auth";
 import StartupCard from "@/components/StartupCard";
-export default function Home({
-  searchParams,
-}: {
-  searchParams?: { query?: string };
-}) {
+
+type Props = {
+  searchParams?: {
+    query?: string | string[];
+  };
+};
+
+export default function Home({ searchParams }: Props) {
   const posts = [
     {
       _createdAt: new Date().toISOString(),
@@ -26,16 +26,18 @@ export default function Home({
   type StartupcardType = {
     _createdAt: string;
     views: number;
-    author: { _id: string };
+    author: { _id: string; name: string };
     _id: string;
     description: string;
     image: string;
-
     category: string;
     title: string;
   };
 
-  const query = searchParams?.query || "";
+  const query = Array.isArray(searchParams?.query)
+    ? searchParams.query[0]
+    : searchParams?.query || "";
+
   return (
     <>
       <section className="pink_container">
@@ -56,7 +58,7 @@ export default function Home({
 
         <ul className="mt-7 card_grid">
           {posts?.length > 0 ? (
-            posts.map((post: StartupcardType, index: number) => (
+            posts.map((post: StartupcardType) => (
               <StartupCard key={post._id} post={post} />
             ))
           ) : (

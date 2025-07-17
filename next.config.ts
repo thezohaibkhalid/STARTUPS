@@ -4,6 +4,7 @@ const nextConfig: NextConfig & { turbopack?: boolean } = {
   turbopack: false, 
   dangerouslyAllowSVG: true,
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
@@ -11,6 +12,8 @@ const nextConfig: NextConfig & { turbopack?: boolean } = {
       },
     ],
   },
+  output: 'export',
+  basePath: '/STARTUPS',  
 };
 
 export default nextConfig;
